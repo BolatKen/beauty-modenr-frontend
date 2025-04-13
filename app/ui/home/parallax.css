@@ -1,0 +1,195 @@
+/* ----------- GLOBAL RESET FOR PARALLAX IMAGES ----------- */
+
+div {
+    padding: 0;
+}
+
+img {
+    object-fit: cover;
+    will-change: transform;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* ----------- COMMON WRAPPERS ----------- */
+  .img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  
+  /* ----------- SECTIONS ----------- */
+  section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding: 2rem 1rem; */
+    box-sizing: border-box;
+  }
+  
+  /* ----------- TYPOGRAPHY ----------- */
+  h1 {
+    font-weight: 400;
+    font-size: clamp(2rem, 6vw, 4rem);
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: #fff;
+  }
+  
+  p {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    font-size: 1.1rem;
+    color: #bbb;
+  }
+  
+  /* ----------- NAVIGATION ----------- */
+  .nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1200px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    color: white;
+    mix-blend-mode: difference;
+    flex-wrap: wrap;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  /* ----------- PROJECTS SECTION ----------- */
+  section.projects {
+    background-color: #111;
+    color: #fff;
+    gap: 4rem;
+    padding: 6rem 2rem;
+  }
+  
+  .projects-brief {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ccc;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    padding: 0 1rem;
+  }
+  
+  .project h1 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+  
+  .project p {
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+  
+  /* ----------- RESPONSIVE ----------- */
+  /* @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+      top: 85%;
+      padding: 1rem;
+    }
+  
+    section.projects {
+      padding: 4rem 1rem;
+      gap: 3rem;
+    }
+  
+    .projects-list {
+      grid-template-columns: 1fr;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    p {
+      font-size: 0.8rem;
+    }
+  } */
+  
+  /* === MOBILE STYLES === */
+  @media (max-width: 768px) {
+    /* Высота секций */
+    section {
+      min-height: 80vh;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  
+    /* Текст по центру */
+    .text-center,
+    .text-left,
+    .text-right {
+      text-align: center !important;
+    }
+  
+    /* Адаптивные шрифты */
+    p,
+    h1 {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  
+    /* Центровка и ширина контейнеров */
+    .max-w-2xl,
+    .max-w-4xl,
+    .max-w-5xl,
+    .max-w-6xl {
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    /* Все .grid на мобилке = 1 колонка */
+    .grid {
+      grid-template-columns: 1fr !important;
+    }
+  
+    /* Уменьшить отступы */
+    .px-4 {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+  
+    /* aspect-video — адаптивно */
+    .aspect-video {
+      aspect-ratio: unset !important;
+      height: auto !important;
+    }
+  
+    /* Кнопки читаемые */
+    button {
+      font-size: 1rem;
+      padding: 0.75rem 1.25rem;
+    }
+  }
+  
+  
+  
