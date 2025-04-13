@@ -34,36 +34,48 @@ const hotspots = [
 
 export default function ParallaxAlbum() {
   const [scrollY, setScrollY] = useState(0);
+  const [imageSrc, setImageSrc] = useState("/portraits/portrait-sofa.jpg");
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
+    const handleResize = () => {
+      const isMobile = window.innerWidth <= 768;
+      setImageSrc(
+        isMobile
+          ? "/portraits/portrait-mobile.jpg"
+          : "/portraits/portrait-sofa.jpg"
+      );
+    };
+
+    handleResize(); // инициализация
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const scale = Math.min(1 + scrollY / 1000, 1.4);
+  const scale = Math.min(1 + scrollY / 1000, 1.3);
 
   return (
-    <div className="relative w-full h-[200vh] top-0 overflow-hidden z-0">
-      {/* Картинка (responsive) */}
-      <picture>
-        <source
-          media="(max-width: 768px)"
-          srcSet="/portraits/portrait-mobile.jpg"
-        />
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* sticky-контейнер */}
+      <div className="sticky top-0 w-full h-screen overflow-hidden z-0">
         <img
-          src="/portraits/portrait-sofa.jpg"
+          src={imageSrc}
           alt="hero"
           style={{
             transform: `scale(${scale})`,
             transition: "transform 0.1s ease-out",
           }}
-          className="fixed top-0 left-0 w-full h-screen object-cover z-0"
+          className="w-full h-full object-cover"
         />
-      </picture>
+      </div>
 
       {/* Hotspots */}
-      <div className="fixed top-0 left-0 w-full h-screen z-20 pointer-events-none">
+      <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none">
         {hotspots.map((spot) => (
           <div
             key={spot.id}
@@ -86,9 +98,6 @@ export default function ParallaxAlbum() {
           </div>
         ))}
       </div>
-
-      {/* Скролл-блок */}
-      <div className="relative z-10 h-[200vh]" />
-    </div>
+    </section>
   );
 }
