@@ -25,7 +25,7 @@ export default function ParallaxAlbum() {
         transition={{ duration: 1 }}
         className="min-h-screen flex flex-col justify-center items-center text-center px-0"
       >
-        <div className="w-full">
+        <div className="w-full bg-white">
           {/* HERO */}
           <section className="relative min-h-screen w-full overflow-hidden">
             {/* Фоновое изображение */}

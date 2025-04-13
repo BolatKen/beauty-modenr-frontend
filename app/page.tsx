@@ -1,13 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import LatestOfferings from "./ui/home/latest-offerings";
+// import LatestOfferings from "./ui/home/latest-offerings";
 
 import ParallaxAlbum from "./ui/home/parallax-album";
+import HeroParallax from "./ui/home/hero-parallax";
 
 export default function Page() {
   return (
     <>
+      <HeroParallax />
       <ParallaxAlbum />
       <main className="flex flex-col">
         {/* HERO */}
@@ -15,7 +17,7 @@ export default function Page() {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="min-h-screen flex flex-col justify-center items-center text-center px-6"
+          className="min-h-screen bg-white flex flex-col justify-center items-center text-center px-6"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-4">
             Discover the Art of Style
