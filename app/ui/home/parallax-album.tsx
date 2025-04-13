@@ -19,12 +19,13 @@ export default function ParallaxAlbum() {
 
   return (
     <LayoutWrapper>
-      <motion.section
+      {/* <motion.section
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="min-h-screen flex flex-col justify-center items-center text-center px-0"
-      >
+      > */}
+      <section className="min-h-screen bg-white flex flex-col justify-center items-center text-center px-0">
         <div className="w-full bg-white">
           {/* HERO */}
           <section className="relative min-h-screen w-full overflow-hidden">
@@ -38,7 +39,6 @@ export default function ParallaxAlbum() {
                 className="w-full h-full object-cover transform scale-[1.2] blur-sm sm:scale-100 sm:blur-none transition-all duration-700 ease-in-out"
               />
             </div>
-
             {/* Контент поверх изображения */}
             <div className="absolute inset-0 flex flex-col sm:flex-row items-center justify-center sm:justify-around z-10 text-white mix-blend-difference text-base px-4 py-6 space-y-4 sm:space-y-0 sm:space-x-6">
               <p className="uppercase tracking-wide">Tour</p>
@@ -47,13 +47,10 @@ export default function ParallaxAlbum() {
               <p className="uppercase tracking-wide">Merch</p>
             </div>
           </section>
-
           {/* Product-demo */}
           <ProductDetailCard />
-
           {/* Marquee - Effect */}
           <ScrollingGallery />
-
           {/* PROJECTS */}
           <section className="relative w-full min-h-screen overflow-hidden bg-black text-white">
             {/* Фоновая картинка */}
@@ -66,7 +63,6 @@ export default function ParallaxAlbum() {
                 className={""}
               />
             </div>
-
             {/* Контент поверх изображения */}
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center bg-black/40 backdrop-blur-sm">
               {/* Текст */}
@@ -75,7 +71,6 @@ export default function ParallaxAlbum() {
                 print, and publishing industries for previewing layouts and
                 visual mockups.
               </p>
-
               {/* Список проектов */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl">
                 {["Sunrise", "Appolo", "Gianto", "Bombardo"].map((title) => (
@@ -89,7 +84,6 @@ export default function ParallaxAlbum() {
               </div>
             </div>
           </section>
-
           {/* Latest Offerings — будет появляться только при inView */}
           <motion.div
             className="hover:cursor-pointer"
@@ -99,7 +93,6 @@ export default function ParallaxAlbum() {
           >
             <LatestOfferings />
           </motion.div>
-
           {/* ABOUT */}
           <section className="relative w-full min-h-screen overflow-hidden text-white">
             {/* Картинка (фон) */}
@@ -114,7 +107,6 @@ export default function ParallaxAlbum() {
               {/* Оверлей-затемнение */}
               <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
             </div>
-
             {/* Контент поверх */}
             <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 md:px-12 text-center max-w-4xl mx-auto">
               <p className="text-base font-semibold uppercase text-neutral-200 mb-4 drop-shadow-md">
@@ -128,7 +120,6 @@ export default function ParallaxAlbum() {
               </p>
             </div>
           </section>
-
           <section className="relative w-full min-h-screen overflow-hidden bg-black text-white">
             {/* Контент поверх */}
             <div className="relative z-10 flex flex-col gap-12 items-center justify-center px-4 py-20 text-center max-w-6xl mx-auto">
@@ -138,7 +129,6 @@ export default function ParallaxAlbum() {
                 print, and publishing industries for previewing layouts and
                 visual mockups.
               </p>
-
               {/* Вторая картинка */}
               <div className="w-full max-w-4xl aspect-video overflow-hidden">
                 <ParallaxImage
@@ -149,7 +139,6 @@ export default function ParallaxAlbum() {
                   className={""}
                 />
               </div>
-
               {/* Список проектов */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl">
                 {["Sunrise", "Appolo", "Gianto", "Bombardo"].map((title) => (
@@ -163,7 +152,6 @@ export default function ParallaxAlbum() {
               </div>
             </div>
           </section>
-
           {/* BANNER */}
           <section className="w-full py-24 px-4 md:px-12 bg-neutral-900 text-white grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="aspect-video overflow-hidden">
@@ -187,7 +175,6 @@ export default function ParallaxAlbum() {
               </button>
             </div>
           </section>
-
           {/* FOOTER */}
           <section className="w-full py-16 px-4 md:px-12 bg-black text-white grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="space-y-4">
@@ -226,7 +213,8 @@ export default function ParallaxAlbum() {
             </div>
           </section>
         </div>
-      </motion.section>
+      </section>
+      {/* </motion.section> */}
     </LayoutWrapper>
   );
 }
