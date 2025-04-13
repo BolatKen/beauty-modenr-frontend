@@ -45,16 +45,22 @@ export default function ParallaxAlbum() {
 
   return (
     <div className="relative w-full h-[200vh] top-0 overflow-hidden z-0">
-      {/* Картинка */}
-      <img
-        src="/portraits/portrait-sofa.jpg"
-        alt="hero"
-        style={{
-          transform: `scale(${scale})`,
-          transition: "transform 0.1s ease-out",
-        }}
-        className="fixed top-0 left-0 w-full h-screen object-cover z-0"
-      />
+      {/* Картинка (responsive) */}
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcSet="/portraits/portrait-mobile.jpg"
+        />
+        <img
+          src="/portraits/portrait-sofa.jpg"
+          alt="hero"
+          style={{
+            transform: `scale(${scale})`,
+            transition: "transform 0.1s ease-out",
+          }}
+          className="fixed top-0 left-0 w-full h-screen object-cover z-0"
+        />
+      </picture>
 
       {/* Hotspots */}
       <div className="fixed top-0 left-0 w-full h-screen z-20 pointer-events-none">
@@ -64,10 +70,7 @@ export default function ParallaxAlbum() {
             className="absolute group pointer-events-auto"
             style={{ top: spot.top, left: spot.left }}
           >
-            {/* Точка */}
             <div className="w-4 h-4 bg-white border border-black rounded-full" />
-
-            {/* Всплывающая карточка */}
             <div className="absolute top-6 left-0 opacity-0 group-hover:opacity-100 transition duration-300 bg-white text-black text-sm rounded-lg shadow-xl w-64 p-4 flex gap-3 z-30">
               <img
                 src={spot.image}
