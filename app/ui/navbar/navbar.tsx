@@ -36,13 +36,7 @@ export default function Navbar() {
       }`}
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
-        {/* Лого */}
-        <Link
-          href="/"
-          className="text-2xl font-bold tracking-tight text-slate-900"
-        >
-          StoreName
-        </Link>
+
 
         {/* Навигация — Desktop */}
         <ul className="hidden md:flex items-center space-x-8 text-sm font-medium">
@@ -62,6 +56,14 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
+                  {/* Лого */}
+        <Link
+          href="/"
+          className="text-2xl font-bold tracking-tight text-slate-900"
+        >
+          StoreName
+        </Link>
 
         {/* Иконки — Desktop */}
         <div className="hidden md:flex items-center gap-6 text-gray-600">
