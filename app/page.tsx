@@ -11,11 +11,11 @@ export default function Page() {
   const [fadeOut, setFadeOut] = useState(false);
 
   const images = [
-    "/portraits/portrait1.jpg",
-    "/portraits/portrait2.jpg",
-    "/portraits/portrait3.jpg",
-    "/portraits/portrait4.jpg",
-    "/portraits/portrait5.jpg",
+    "/portraits/SKIN0037.jpg",
+    "/portraits/SKIN0057.jpg",
+    "/portraits/SKIN0181.jpg",
+    "/portraits/SKIN0239.jpg",
+    "/portraits/SKIN0332.jpg",
   ];
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Page() {
         }
         return prev + 1;
       });
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -66,48 +66,66 @@ export default function Page() {
     }, 1000);
   };
 
+  const text = "LEKA BEAUTY".split("");
+
   return (
     <>
+      {/* Прелоудер с фото и текстом */}
       <AnimatePresence>
         {!finished && (
-          <motion.div
-            key="intro"
-            initial={{ opacity: 1, scale: 1, y: 0 }}
-            animate={{
-              opacity: fadeOut ? 0 : 1,
-              scale: fadeOut ? 0.95 : 1,
-              y: fadeOut ? -50 : 0,
-            }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            className="fixed top-0 left-0 w-full h-screen z-50"
-          >
-            {images.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                alt={`slide-${i}`}
-                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                  i === index ? "opacity-100" : "opacity-0"
-                }`}
+          <div className="fixed top-0 left-0 w-full h-screen z-50 overflow-hidden pointer-events-none bg-black">
+            {/* Фон — теперь используем AnimatePresence с custom для плавного перехода */}
+            <AnimatePresence mode="popLayout" custom={index}>
+              <motion.img
+                key={index}
+                src={images[index]}
+                alt={`slide-${index}`}
+                custom={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, scale: 1.05 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute top-0 left-0 w-full h-full object-cover z-0 will-change-transform"
               />
-            ))}
-            <div className="absolute inset-0 bg-black/30" />
-          </motion.div>
+            </AnimatePresence>
+          
+            {/* Затемнение и текст — исчезают при fadeOut */}
+            <motion.div
+              key="overlay"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: fadeOut ? 0 : 1 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0 z-10 flex items-center justify-center bg-black/10"
+            >
+              <h1 className="flex gap-2 text-white text-4xl md:text-6xl font-light tracking-[0.4em] uppercase">
+                {text.map((char, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: i * 0.07,
+                      duration: 0.5,
+                      ease: "easeOut",
+                    }}
+                    className="inline-block"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </h1>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
-      {/* Главный контент */}
-      <main
-        className={`${
-          !finished
-            ? "fixed top-0 left-0 w-full h-screen overflow-hidden"
-            : "relative"
-        } z-0`}
-      >
-        <HeroParallax />
-        <ParallaxAlbum />
-      </main>
+      {/* Главный контент — появляется ТОЛЬКО после прелоудера */}
+      {finished && (
+        <main className="relative z-0">
+          <HeroParallax />
+          <ParallaxAlbum />
+        </main>
+      )}
     </>
   );
 }
