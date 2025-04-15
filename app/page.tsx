@@ -68,6 +68,16 @@ export default function Page() {
 
   const text = "LEKA BEAUTY".split("");
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
   return (
     <>
       {/* Прелоудер с фото и текстом */}
@@ -88,32 +98,43 @@ export default function Page() {
                 className="absolute top-0 left-0 w-full h-full object-cover z-0 will-change-transform"
               />
             </AnimatePresence>
-          
+
             {/* Затемнение и текст — исчезают при fadeOut */}
             <motion.div
-              key="overlay"
               initial={{ opacity: 1 }}
               animate={{ opacity: fadeOut ? 0 : 1 }}
               transition={{ duration: 1 }}
               className="absolute inset-0 z-10 flex items-center justify-center bg-black/10"
             >
-              <h1 className="flex gap-2 text-white text-4xl md:text-6xl font-light tracking-[0.4em] uppercase">
+              <motion.h1
+                className="flex gap-2 text-white text-4xl md:text-6xl font-light tracking-[0.4em] uppercase"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 {text.map((char, i) => (
                   <motion.span
                     key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: i * 0.07,
-                      duration: 0.5,
-                      ease: "easeOut",
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          delay: i * 0.07,
+                          duration: 0.6,
+                          ease: "easeOut",
+                        },
+                      },
                     }}
                     className="inline-block"
                   >
                     {char === " " ? "\u00A0" : char}
                   </motion.span>
                 ))}
-              </h1>
+              </motion.h1>
             </motion.div>
           </div>
         )}
