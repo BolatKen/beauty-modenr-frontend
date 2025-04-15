@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ParallaxAlbum from "./ui/home/parallax-album";
 import HeroParallax from "./ui/home/hero-parallax";
 import { motion, AnimatePresence } from "framer-motion";
@@ -68,15 +68,9 @@ export default function Page() {
 
   const text = "LEKA BEAUTY".split("");
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.3,
-      },
-    },
-  };
+  const randomDelays = useRef(
+    text.map(() => 0.3 + Math.random() * 1.1) // диапазон можно менять
+  ).current;
 
   return (
     <>
@@ -92,7 +86,7 @@ export default function Page() {
                 alt={`slide-${index}`}
                 custom={index}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
                 className="absolute top-0 left-0 w-full h-full object-cover z-0 will-change-transform"
@@ -106,35 +100,23 @@ export default function Page() {
               transition={{ duration: 1 }}
               className="absolute inset-0 z-10 flex items-center justify-center bg-black/10"
             >
-              <motion.h1
-                className="flex gap-2 text-white text-4xl md:text-6xl font-light tracking-[0.4em] uppercase"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-              >
+              <h1 className="flex flex-wrap justify-center text-center gap-2 text-white text-3xl md:text-6xl font-light tracking-[0.2em] md:tracking-[0.4em] uppercase max-w-[90vw]">
                 {text.map((char, i) => (
                   <motion.span
                     key={i}
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                      hidden: { opacity: 0, y: 30 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: {
-                          delay: i * 0.07,
-                          duration: 0.6,
-                          ease: "easeOut",
-                        },
-                      },
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: randomDelays[i],
+                      duration: 0.6,
+                      ease: "easeOut",
                     }}
                     className="inline-block"
                   >
                     {char === " " ? "\u00A0" : char}
                   </motion.span>
                 ))}
-              </motion.h1>
+              </h1>
             </motion.div>
           </div>
         )}
