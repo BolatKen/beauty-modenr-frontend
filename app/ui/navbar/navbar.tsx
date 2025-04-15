@@ -13,6 +13,10 @@ const navItems = [
   { href: "/contact", label: "Contact" },
 ];
 
+// Цвет в RGB формате
+const textColor = "rgb(19, 73, 55)";
+const hoverColor = "rgb(15, 60, 45)"; // чуть темнее для ховера
+
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -36,54 +40,83 @@ export default function Navbar() {
       }`}
     >
       <nav className="flex items-center justify-between max-w-7xl mx-auto px-6 py-4">
-        {/* Лого */}
+        {/* Левая часть навигации (пустая для баланса) */}
+        <div className="hidden md:flex items-center space-x-8 text-sm font-medium w-1/3 justify-start">
+          {navItems.slice(0, 2).map(({ href, label }) => (
+            <li key={href} className="group relative list-none">
+              <Link
+                href={href}
+                className={`transition-colors ${
+                  pathname === href ? `text-[${textColor}]` : `text-[${textColor}]/70 hover:text-[${textColor}]`
+                }`}
+                style={{
+                  color: pathname === href ? textColor : `${textColor}B3`, // B3 = 70% opacity
+                }}
+              >
+                {label}
+              </Link>
+              <span 
+                className="absolute left-0 -bottom-1 w-0 h-0.5 transition-all group-hover:w-full"
+                style={{ backgroundColor: textColor }}
+              ></span>
+            </li>
+          ))}
+        </div>
+
+        {/* Лого по центру */}
         <Link
           href="/"
-          className="text-2xl font-bold tracking-tight text-slate-900"
+          className="text-2xl font-bold tracking-tight mx-auto md:mx-0"
+          style={{ color: textColor }}
         >
           StoreName
         </Link>
 
-        {/* Навигация — Desktop */}
-        <ul className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          {navItems.map(({ href, label }) => (
-            <li key={href} className="group relative">
+        {/* Правая часть навигации */}
+        <div className="hidden md:flex items-center space-x-8 text-sm font-medium w-1/3 justify-end">
+          {navItems.slice(2).map(({ href, label }) => (
+            <li key={href} className="group relative list-none">
               <Link
                 href={href}
                 className={`transition-colors ${
-                  pathname === href
-                    ? "text-black"
-                    : "text-gray-500 hover:text-black"
+                  pathname === href ? `text-[${textColor}]` : `text-[${textColor}]/70 hover:text-[${textColor}]`
                 }`}
+                style={{
+                  color: pathname === href ? textColor : `${textColor}B3`,
+                }}
               >
                 {label}
               </Link>
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
+              <span 
+                className="absolute left-0 -bottom-1 w-0 h-0.5 transition-all group-hover:w-full"
+                style={{ backgroundColor: textColor }}
+              ></span>
             </li>
           ))}
-        </ul>
 
-        {/* Иконки — Desktop */}
-        <div className="hidden md:flex items-center gap-6 text-gray-600">
-          <Link href="/search" className="hover:text-black">
-            <Search size={20} />
-          </Link>
-          <Link href="/account" className="hover:text-black">
-            <User size={20} />
-          </Link>
-          <Link href="/cart" className="relative hover:text-black">
-            <ShoppingBag size={20} />
-            {/* индикатор товаров */}
-            <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-1.5 py-0.5">
-              2
-            </span>
-          </Link>
+          {/* Иконки */}
+          <div className="flex items-center gap-6 ml-6">
+            <Link href="/search" className="hover:opacity-80" style={{ color: textColor }}>
+              <Search size={20} />
+            </Link>
+            <Link href="/account" className="hover:opacity-80" style={{ color: textColor }}>
+              <User size={20} />
+            </Link>
+            <Link href="/cart" className="relative hover:opacity-80" style={{ color: textColor }}>
+              <ShoppingBag size={20} />
+              {/* индикатор товаров */}
+              <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-1.5 py-0.5">
+                2
+              </span>
+            </Link>
+          </div>
         </div>
 
         {/* Бургер — Mobile */}
         <button
           className="md:hidden text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
+          style={{ color: textColor }}
         >
           ☰
         </button>
@@ -104,23 +137,41 @@ export default function Navbar() {
                 href={href}
                 className={`block ${
                   pathname === href
-                    ? "text-black"
-                    : "text-gray-600 hover:text-black"
+                    ? `text-[${textColor}]`
+                    : `text-[${textColor}]/70 hover:text-[${textColor}]`
                 }`}
+                style={{
+                  color: pathname === href ? textColor : `${textColor}B3`,
+                }}
                 onClick={() => setMenuOpen(false)}
               >
                 {label}
               </Link>
             </li>
           ))}
-          <li className="flex justify-center gap-6 pt-2 text-gray-600">
-            <Link href="/search" className="hover:text-black">
+          <li className="flex justify-center gap-6 pt-2">
+            <Link 
+              href="/search" 
+              className="hover:opacity-80" 
+              style={{ color: textColor }}
+              onClick={() => setMenuOpen(false)}
+            >
               <Search size={20} />
             </Link>
-            <Link href="/account" className="hover:text-black">
+            <Link 
+              href="/account" 
+              className="hover:opacity-80" 
+              style={{ color: textColor }}
+              onClick={() => setMenuOpen(false)}
+            >
               <User size={20} />
             </Link>
-            <Link href="/cart" className="relative hover:text-black">
+            <Link 
+              href="/cart" 
+              className="relative hover:opacity-80" 
+              style={{ color: textColor }}
+              onClick={() => setMenuOpen(false)}
+            >
               <ShoppingBag size={20} />
               <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white rounded-full px-1.5 py-0.5">
                 2
